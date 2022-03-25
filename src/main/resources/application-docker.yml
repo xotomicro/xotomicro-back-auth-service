@@ -1,0 +1,22 @@
+server:
+  port: 8082
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:9090/eureka
+  instance:
+    preferIpAddress: true
+
+spring:
+  application:
+    name: authservice
+
+jwt:
+  token:
+    issuer: AuthService
+    expire-in-minutes: 15
+
+downstream:
+  userservice:
+    search-user: http://internal-gateway/users/search?username=%s
