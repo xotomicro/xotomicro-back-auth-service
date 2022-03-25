@@ -18,7 +18,7 @@ jobs:
     name: notify
     runs-on: ubuntu-latest
     needs: 
-      - test
+      - install
     if: ${{ always() }} 
 
     steps:
