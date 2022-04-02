@@ -1,5 +1,17 @@
-### AUTHSERVICE BACKEND
+### 🤷🏼‍♂️ PREREQUISITE DEV
+- Java version 11 (at least)
+- Maven
+- Docker environment
+- Docker compose
 
+### 🐳 RUNNING THE APP DOCKER
+
+```shell
+mvn clean install # install all deps for backend from parent pom file
+docker-compose --env-file .env up --build -d
+```
+
+### 🚚 SERVICES
 *Request*
 ```shell
 curl --location --request POST 'http://localhost:8081/auth/login' \
