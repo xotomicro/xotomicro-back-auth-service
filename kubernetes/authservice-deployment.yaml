@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: xotomicro-back-auth-service
+  name: xotomicro-back-auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: xotomicro-back-auth-service
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        io.kompose.service: xotomicro-back-auth-service
+    spec:
+      containers:
+        - env:
+            - name: JVM_OPTS
+              value: -Xmx512m -Xms512m
+            - name: SECRET_KEY
+              value: 1jcryR3Lsf
+          image: xotomicro-back-auth-service
+          imagePullPolicy: IfNotPresent
+          name: xotomicro-back-auth-service
+          ports:
+            - containerPort: 8082
+          resources: {}
+      restartPolicy: Always
+status: {}

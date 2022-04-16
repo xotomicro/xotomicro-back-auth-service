@@ -1,0 +1,40 @@
+name: ci-cl
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: clean install
+        run: mvn clean install -Dmaven.test.skip
+
+      - name: test        
+        run: mvn clean test
+
+  notify:
+    name: notify
+    runs-on: ubuntu-latest
+    needs: 
+      - test
+    if: ${{ always() }} 
+
+    steps:
+      - name: notify
+        uses: nobrayner/discord-webhook@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          discord-webhook: https://discord.com/api/webhooks/957013184940761209/GfNguKMrIVhU0BZUhM6ZxN5m-G6d62aAi8zIrVlRlJWwOyKpcN-F_f6LipD9asJUwA59
+          username: 'xotomicro'
+          title: '${{ github.workflow }}: {{STATUS}}'
+          description: '${{ github.event_name }} trigged this {{STATUS}}!'
+          include-details: 'true'
+          color-success: '#4287f5'
+          color-failure: 'eb4034'
+          color-cancelled: '0x42daf5'
+          

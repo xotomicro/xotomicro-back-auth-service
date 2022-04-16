@@ -1,0 +1,22 @@
+server:
+  port: 8082
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:9090/eureka
+  instance:
+    preferIpAddress: true
+
+spring:
+  application:
+    name: xotomicro-back-auth-service
+
+jwt:
+  token:
+    issuer: AuthService
+    expire-in-minutes: 15
+
+downstream:
+  xotomicro-back-user-service:
+    search-user: http://xotomicro-back-internal-gateway-system/users/search?username=%s
