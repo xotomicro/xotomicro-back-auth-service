@@ -21,6 +21,10 @@ spec:
               value: -Xmx512m -Xms512m
             - name: SECRET_KEY
               value: 1jcryR3Lsf
+            - name: PROFILE
+              value: docker
+            - name: ENV
+              value: production
           image: xotomicro-back-auth-service
           imagePullPolicy: IfNotPresent
           name: xotomicro-back-auth-service
